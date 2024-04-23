@@ -1,8 +1,10 @@
---========================Integrantes do Grupo===============================
---Renan Parpinelli Scarpin        número USP 14712188
---Arthur Ernesto de carvalho      número USP 14559479
---Vinicius Gustierrez Neves       número USP 14749363
---===========================================================================
+{-
+========================Integrantes do Grupo===============================
+Renan Parpinelli Scarpin        número USP 14712188
+Arthur Ernesto de carvalho      número USP 14559479
+Vinicius Gustierrez Neves       número USP 14749363
+===========================================================================
+-}
 
 main :: IO ()
 main = do
