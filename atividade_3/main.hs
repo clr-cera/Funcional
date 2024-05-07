@@ -9,7 +9,7 @@ Vinicius Gustierrez Neves       número USP 14749363
 main :: IO ()
 main = do
     line1 <- getLine
-    let a = map read (words line1) :: [Int] 
+    let a = map read (words line1) :: [Int]
     let b = countIntervalo 0 a
     let maior = getMax b
     print maior
@@ -31,4 +31,3 @@ getMax (x1:xs)
     | x1 > x2 = x1
     | otherwise = x2
     where x2 = getMax xs
-
