@@ -27,23 +27,9 @@ contagem _ = ""
 
 --Função que calcula a pontuação da partida de boliche
 pontuacao :: [Int] -> Int
-pontuacao [] = 0
-pontuacao [x1,x2,x3] = x1 + x2 + x3
+pontuacao [x1,x2,x3] = x1 + x2 + x3 --O ultimo frame pode ter três jogadas
+pontuacao [x1,x2] = x1 + x2 --Caso o ultimo frame tenha apenas 2 jogadas
 pontuacao (x1:x2:x3:xs)
-    | x1 == 10       = x1 + x2 + x3 + pontuacao (x2:x3:xs)
-    | x1 + x2 == 10  = x1 + x2 + x3 + pontuacao (x3:xs)
-    | otherwise      = x1 + pontuacao (x2:x3:xs)
-
-{-
-Ainda não entendi as regras da pontuação no ultimo frame, 
-talvez esse código seja útil, talvez não.
-
-Quase certeza que será inutil, mas vou manter por precaução.
-
-pontuacao [x1,x2,x3]
-    | x1 == 10 && x2 == 10  = x1 + (2 * x2) + (3 * x3)
-    | x1 == 10              = x1 + (2 * x2) + (2 * x3)
-    | x2 == 10              = x1 + x2 + (2 * x3)
-    | x1 + x2   == 10       = x1 + x2 + (2 * x3)
-    | otherwise             = x1 + x2 + x3 
--}
+    | x1 == 10       = x1 + x2 + x3 + pontuacao (x2:x3:xs) --strike
+    | x1 + x2 == 10  = x1 + x2 + x3 + pontuacao (x3:xs) --spare
+    | otherwise      = x1 + x2 + pontuacao (x3:xs)
