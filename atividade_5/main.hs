@@ -7,6 +7,7 @@ Vinicius Gustierrez Neves       número USP 14749363
 ===========================================================================
 -}
 
+-- Registro que correponde a uma entrada do csv
 data Register = Register {
     country :: [Char],
     confirmed :: Int,
@@ -16,6 +17,7 @@ data Register = Register {
 }
     deriving (Read,  Show, Eq, Ord)
 
+-- Função que transforma um conjunto de strings em um registro
 contentToRegister :: [[Char]] -> Register
 contentToRegister content =
     Register {
@@ -28,6 +30,8 @@ contentToRegister content =
 
 main :: IO ()
 main = do
+
+-- Lê os inputs
     input <- getContents 
     let intList :: [Int] = map  read  (words input)
 
@@ -36,15 +40,18 @@ main = do
     let n3 = head $ tail $ tail intList
     let n4 = head $ tail $ tail $ tail intList
 
+--Lê e processa o arquivo csv
     everything <- readFile "dados.csv"
     let first = lines everything
     let parsed = map (split (== ',')) first
     let registers = map contentToRegister parsed
 
+-- Calcula o item 1)
     let a :: Int = sum $ 
             map active $
             filter ((>=n1).confirmed) registers
 
+-- Calcula o item 2)
     let b :: Int = sum $
             map deaths $
             take n3 $
@@ -52,6 +59,7 @@ main = do
             take n2 $
             sortBy (\x y -> compare (active y) (active x)) registers
 
+-- Calcula o item 3)
     let c :: [[Char]] =  map country $
             sortBy (\x y -> compare (country x) (country y)) $
             take n4 $
@@ -64,7 +72,7 @@ main = do
 
 
 
-
+-- Função que divide uma string em múltiplas levando em consideração uma função (Char-> Bool), no qual o char é o separador
 split :: (Char -> Bool) -> String -> [String]
 split separator string =  case dropWhile separator string of
                       "" -> []
